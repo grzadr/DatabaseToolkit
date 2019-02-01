@@ -75,6 +75,9 @@ class SQLConnect:
     def get_columns(self):
         return [ele[0] for ele in self.cursor.description]
 
+    def get_tables_names(self):
+         return self.cursor.execute(".tables")
+
 def display_info(df : pd.DataFrame, rows = 10):
     if (type(df) is pd.DataFrame):
         display(df.info())
