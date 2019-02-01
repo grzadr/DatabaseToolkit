@@ -1,6 +1,7 @@
 import sqlite3 as sql
 import pandas as pd
 from time import time, localtime, strftime
+from IPython.display import display, HTML
 
 def time_log():
     return strftime("%Y-%m-%d %T", localtime(time()))
@@ -74,7 +75,7 @@ class SQLConnect:
     def get_columns(self):
         return [ele[0] for ele in self.cursor.description]
 
-def show_info(df : pd.DataFrame, rows = 10):
+def display_info(df : pd.DataFrame, rows = 10):
     if (type(df) is pd.DataFrame):
         display(df.info())
     display(df.describe())
