@@ -34,7 +34,7 @@ def terminate_connection(connection, cursor, clean=False, check=False):
     print(log("### Closing database connection"))
 
     connection.commit()
-    
+
     if check:
         cursor.execute("PRAGMA foreign_key_check;")
         cursor.execute("PRAGMA integrity_check;")
@@ -79,8 +79,12 @@ class SQLConnect:
          return self.cursor.execute(".tables")
 
 def display_info(df : pd.DataFrame, rows = 10):
-    if (type(df) is pd.DataFrame):
-        display(df.info())
-    display(df.describe())
-    display(df.head(rows))
-    display(df.tail(rows))
+    if (df is None):
+        display("None")
+    else:
+        if (type(df) is pd.DataFrame):
+            display(df.info())
+        display(df.describe())
+        display(df.head(rows))
+        display(df.tail(rows))
+

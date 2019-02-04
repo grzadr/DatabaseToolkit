@@ -1,1 +1,1 @@
-__all__ = ["toolkit", ]
+__all__ = ["toolkit", "plotting"]
