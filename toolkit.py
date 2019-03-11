@@ -78,13 +78,14 @@ class SQLConnect:
     def get_tables_names(self):
          return self.cursor.execute(".tables")
 
-def display_info(df : pd.DataFrame, rows = 10):
+def display_info(df : pd.DataFrame, rows = 10,
+                 percentiles=[.01, .05, 0.1, .25, .5, .75, .9, .95, .99]):
     if (df is None):
         display("None")
     else:
         if (type(df) is pd.DataFrame):
             display(df.info())
-        display(df.describe())
+        display(df.describe(percentiles=percentiles))
         display(df.head(rows))
         display(df.tail(rows))
 
