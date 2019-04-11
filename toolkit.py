@@ -68,7 +68,7 @@ class SQLConnect:
         if kind  == "pandas":
             return pd.DataFrame(result, columns=self.get_columns())
         elif kind == "tuple":
-            return (self.get_columns, result if len(result) else None)
+            return (self.get_columns, result )
         else:
             return result if len(result) else None
 
