@@ -54,7 +54,8 @@ class SQLConnect:
     def close(self, clean=False):
         terminate_connection(self.connection, self.cursor, clean)
 
-    def execute(self, query: str, *args):
+    def execute(self, query: str, *args, kind = "pandas", **kwargs):
+
         if not len(args):
             result = self.cursor.execute(query).fetchall()
         elif type(args[0]) in (list, tuple):
@@ -64,10 +65,13 @@ class SQLConnect:
         else:
             result = self.cursor.execute(query, (args, )).fetchall()
 
-        if not len(result):
-            return None
-        else:
+        if kind  == "pandas":
             return pd.DataFrame(result, columns=self.get_columns())
+        elif kind == "tuple":
+            return (self.get_columns, result if len(result) else None)
+        else:
+            return result if len(result) else None
+
 
     def executemany(self, query: str, params):
         return self.cursor.executemany(query, params)
